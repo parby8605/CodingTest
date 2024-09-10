@@ -13,15 +13,17 @@ function solution(video_len, pos, op_start, op_end, commands) {
     const opStart = timeToSecond(op_start);
     const opEnd = timeToSecond(op_end);
     
-    for (const command of commands) {
-        if (currentTime >= opStart && currentTime <= opEnd) {
+     for (const command of commands) {
+         if (currentTime >= opStart && currentTime <= opEnd) {
            currentTime = opEnd;
         }
-        
+         
         if (command === "next") {
-            currentTime = Math.min(videoLength, currentTime + 10);
+            currentTime += 10;
+            if (currentTime > videoLength) currentTime = videoLength;
         } else if (command === "prev") {
-            currentTime = Math.max(0, currentTime - 10);
+            currentTime -= 10;
+            if (currentTime < 0) currentTime = 0;
         }
         
         if (currentTime >= opStart && currentTime <= opEnd) {
